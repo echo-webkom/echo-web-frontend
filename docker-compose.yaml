@@ -40,7 +40,7 @@ services:
       AUTH_KEY: hemmelig
 
   database:
-    image: postgres:13.2-alpine
+    image: postgres:13.3-alpine
     restart: always
     ports:
       - '5432:5432'
