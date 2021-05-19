@@ -79,7 +79,7 @@ const BedpresPage = ({
                                 <Text>
                                     {(spotsTaken && `${Math.min(spotsTaken, bedpres.spots)}/${bedpres.spots}`) ||
                                         (!spotsTaken && `${bedpres.spots}`)}{' '}
-                                    påmeldt
+                                    plasser
                                 </Text>
                                 <Icon as={BiCalendar} boxSize={10} />
                                 <Text>{format(parseISO(bedpres.date), 'dd. MMM yyyy')}</Text>
