@@ -42,7 +42,7 @@ services:
       WEBKOM_KEY: webkom-passord
 
   database:
-    image: postgres:13.2-alpine
+    image: postgres:13.4-alpine
     restart: always
     ports:
       - '5432:5432'
