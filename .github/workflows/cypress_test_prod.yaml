@@ -23,7 +23,7 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         image_name: echo-web-backend
-        image_tag: latest-dev
+        image_tag: latest-prod
         context: backend
 
     - name: Set up environment
