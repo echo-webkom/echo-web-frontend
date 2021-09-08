@@ -12,8 +12,8 @@
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "lint": "next lint",
         "test": "jest",
-        "e2e:dev": "docker-compose down && cross-env BRANCH=develop FRONTEND_TAG=latest-dev BACKEND_TAG=latest-dev docker-compose up --build --exit-code-from=frontend",
-        "e2e:prod": "docker-compose down && cross-env BRANCH=master FRONTEND_TAG=latest-prod BACKEND_TAG=latest-prod docker-compose up --build --exit-code-from=frontend",
+        "e2e:dev": "docker-compose down && yarn cross-env BRANCH=develop FRONTEND_TAG=latest-dev BACKEND_TAG=latest-dev docker-compose up --build --exit-code-from=frontend",
+        "e2e:prod": "docker-compose down && yarn cross-env BRANCH=master FRONTEND_TAG=latest-prod BACKEND_TAG=latest-prod docker-compose up --build --exit-code-from=frontend",
         "prepare": "husky install"
     },
     "lint-staged": {
