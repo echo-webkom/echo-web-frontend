@@ -27,6 +27,7 @@ jobs:
         echo "BRANCH=$BRANCH" >> .env
         echo "FRONTEND_TAG=$TAG" >> .env
         echo "BACKEND_TAG=$TAG" >> .env
+        echo "DOCKER_HUB_USERNAME=$DOCKER_HUB_USERNAME" >> .env
       env:
         CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID_TESTING }}
         CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN_TESTING }}
@@ -35,6 +36,7 @@ jobs:
         WEBKOM_KEY: webkom-passord
         BRANCH: master
         TAG: latest-prod
+        DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
     - name: Run Cypress end-to-end tests against production backend
       uses: whoan/docker-build-with-cache-action@v5
