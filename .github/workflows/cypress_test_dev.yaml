@@ -53,4 +53,4 @@ jobs:
         image_tag: latest-dev
 
     - name: Run Cypress end-to-end tests against develop backend
-      run: env BRANCH=develop yarn e2e
+      run: yarn e2e:dev
