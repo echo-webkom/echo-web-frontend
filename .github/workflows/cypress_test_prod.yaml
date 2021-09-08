@@ -17,6 +17,14 @@ jobs:
         path: backend
         ref: master
 
+    - name: Build frontend with cache
+      uses: whoan/docker-build-with-cache-action@v5
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        image_name: echo-web-frontend
+        image_tag: latest-prod
+
     - name: Build backend with cache
       uses: whoan/docker-build-with-cache-action@v5
       with:
@@ -33,6 +41,9 @@ jobs:
         echo "CONTENTFUL_ENVIRONMENT_ID=$CONTENTFUL_ENVIRONMENT_ID" >> .env
         echo "BEDKOM_KEY=$BEDKOM_KEY" >> .env
         echo "WEBKOM_KEY=$WEBKOM_KEY" >> .env
+        echo "BRANCH=$BRANCH" >> .env
+        echo "FRONTEND_TAG=$TAG" >> .env
+        echo "BACKEND_TAG=$TAG" >> .env
         # Remove build context pointing to Git URL, since building
         # from Git URL in Docker Compose doesn't work with GitHub Actions.
         sed -i 's/build\: https\:\/\/github.com\/echo-webkom\/echo-web-backend\.git\#\${BRANCH}//g' $COMPOSE_FILE
@@ -43,14 +54,12 @@ jobs:
         BEDKOM_KEY: bedkom-passord
         WEBKOM_KEY: webkom-passord
         COMPOSE_FILE: docker-compose.yaml
+        BRANCH: master
+        TAG: latest-prod
 
-    - name: Build frontend with cache
+    - name: Run Cypress end-to-end tests against production backend
       uses: whoan/docker-build-with-cache-action@v5
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        image_name: echo-web-frontend
-        image_tag: latest-prod
-
-    - name: Run Cypress end-to-end tests against master backend
-      run: yarn e2e:prod
+        compose_file: docker-compose.yaml
