@@ -20,7 +20,7 @@ services:
       BEDKOM_KEY: ${BEDKOM_KEY}
 
   backend:
-    #    build: backend
+    build: backend
     image: "${DOCKER_HUB_USERNAME}/echo-web-backend:${BACKEND_TAG}"
     # Don't start backend before database is up.
     depends_on:
