@@ -12,8 +12,8 @@
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "lint": "next lint",
         "test": "jest",
-        "e2e:dev": "docker-compose down && yarn cross-env BRANCH=develop FRONTEND_TAG=latest-dev BACKEND_TAG=latest-dev docker-compose up --build --exit-code-from=frontend",
-        "e2e:prod": "docker-compose down && yarn cross-env BRANCH=master FRONTEND_TAG=latest-prod BACKEND_TAG=latest-prod docker-compose up --build --exit-code-from=frontend",
+        "e2e:dev": "docker-compose down && env BRANCH=develop FRONTEND_TAG=latest-dev BACKEND_TAG=latest-dev docker-compose up --build --exit-code-from=frontend",
+        "e2e:prod": "docker-compose down && env BRANCH=master FRONTEND_TAG=latest-prod BACKEND_TAG=latest-prod docker-compose up --build --exit-code-from=frontend",
         "prepare": "husky install"
     },
     "lint-staged": {
@@ -134,7 +134,6 @@
         "@typescript-eslint/eslint-plugin": "4.30.0",
         "@typescript-eslint/parser": "4.30.0",
         "babel-jest": "27.1.0",
-        "cross-env": "7.0.3",
         "cypress": "8.3.1",
         "eslint": "7.32.0",
         "eslint-config-next": "11.1.2",
