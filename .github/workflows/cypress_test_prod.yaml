@@ -58,8 +58,4 @@ jobs:
         TAG: latest-prod
 
     - name: Run Cypress end-to-end tests against production backend
-      uses: whoan/docker-build-with-cache-action@v5
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        compose_file: docker-compose.yaml
+      run: yarn e2e:prod
