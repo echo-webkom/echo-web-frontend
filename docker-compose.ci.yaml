@@ -2,7 +2,7 @@ version: '3.9'
 services:
   frontend:
     build: .
-    image: echo-web-frontend
+    image: "${DOCKER_HUB_USERNAME}/echo-web-frontend:${FRONTEND_TAG}"
     command: bash -c "yarn start & yarn cypress run --config video=false,screenshotOnRunFailure=false && kill $$!"
     # Don't start tests before backend is up.
     depends_on:
@@ -21,7 +21,7 @@ services:
 
   backend:
     build: backend
-    image: echo-web-backend
+    image: "${DOCKER_HUB_USERNAME}/echo-web-backend:${BACKEND_TAG}"
     # Don't start backend before database is up.
     depends_on:
       database:

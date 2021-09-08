@@ -39,9 +39,6 @@ jobs:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
     - name: Run Cypress end-to-end tests against develop backend
-      uses: whoan/docker-build-with-cache-action@v5
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        compose_file: docker-compose.ci.yaml
-        image_tag: latest-dev
+      run: docker-compose -f $COMPOSE_FILE up --build --exit-code-from=frontend
+      env:
+        COMPOSE_FILE: docker-compose.ci.yaml

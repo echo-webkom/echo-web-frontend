@@ -2,7 +2,7 @@ version: '3.9'
 services:
   frontend:
     build: .
-    image: echo-web-frontend:latest-dev
+    image: echo-web-frontend:latest
     command: bash -c "yarn start & yarn cypress run --config video=false,screenshotOnRunFailure=false && kill $$!"
     # Don't start tests before backend is up.
     depends_on:
@@ -21,7 +21,7 @@ services:
 
   backend:
     build: https://github.com/echo-webkom/echo-web-backend.git#${BRANCH}
-    image: echo-web-backend:latest-dev
+    image: echo-web-backend:latest
     # Don't start backend before database is up.
     depends_on:
       database:
