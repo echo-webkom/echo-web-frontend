@@ -1,5 +1,5 @@
 import { useTimeout } from '@chakra-ui/react';
-import { differenceInMilliseconds, parseISO } from 'date-fns';
+import { differenceInMilliseconds, formatISO, parseISO } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
@@ -26,7 +26,7 @@ const BedpresPage = ({
     error: string;
 }): JSX.Element => {
     const router = useRouter();
-    const regDate = parseISO(bedpres?.registrationTime);
+    const regDate = parseISO(bedpres?.registrationTime || formatISO(new Date()));
     const time =
         !bedpres || differenceInMilliseconds(regDate, date) < 0 || differenceInMilliseconds(regDate, date) > 172800000
             ? null

@@ -1,3 +1,4 @@
+import { useTimeout } from '@chakra-ui/react';
 import { differenceInMilliseconds, formatISO, parseISO } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -10,7 +11,6 @@ import SEO from '../../components/seo';
 import { Event, EventAPI } from '../../lib/api/event';
 import { HappeningType, SpotRangeCount } from '../../lib/api/registration';
 import getHappening from '../../lib/api/get-happening';
-import { useTimeout } from '../../lib/hooks';
 
 const EventPage = ({
     event,
@@ -33,7 +33,7 @@ const EventPage = ({
             : differenceInMilliseconds(regDate, date);
 
     useTimeout(() => {
-        if (event.registrationTime) router.replace(router.asPath, undefined, { scroll: false });
+        router.replace(router.asPath, undefined, { scroll: false });
     }, time);
 
     return (
