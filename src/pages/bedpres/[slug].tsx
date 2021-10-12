@@ -9,7 +9,8 @@ import HappeningUI from '../../components/happening';
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import { Bedpres, BedpresAPI } from '../../lib/api/bedpres';
-import { HappeningType, RegistrationAPI, SpotRangeCount } from '../../lib/api/registration';
+import { HappeningType, SpotRangeCount } from '../../lib/api/registration';
+import getHappening from '../../lib/api/get-happening';
 
 const BedpresPage = ({
     bedpres,
@@ -61,19 +62,6 @@ interface Params extends ParsedUrlQuery {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { slug } = context.params as Params;
     const { bedpres, error } = await BedpresAPI.getBedpresBySlug(slug);
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8080';
-
-    const adminKey = process.env.ADMIN_KEY;
-    if (!adminKey) throw Error('No ADMIN_KEY defined.');
-
-    const { spotRangeCounts } = await RegistrationAPI.getSpotRangeCounts(
-        adminKey,
-        slug,
-        HappeningType.BEDPRES,
-        backendUrl,
-    );
-
-    const date = Date.now();
 
     if (error === '404') {
         return {
@@ -81,15 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         };
     }
 
-    return {
-        props: {
-            bedpres,
-            spotRangeCounts,
-            date,
-            backendUrl,
-            error,
-        },
-    };
+    return { props: { ...(await getHappening(bedpres, slug, HappeningType.BEDPRES)), error: error } };
 };
 
 export default BedpresPage;
