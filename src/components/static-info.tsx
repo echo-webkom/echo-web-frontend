@@ -1,8 +1,7 @@
 import { Grid, GridItem, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import React from 'react';
-import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
 import Section from './section';
+import { useQueryTabs, toQuery } from '../lib/hooks';
 
 const StaticInfo = ({
     tabNames,
@@ -11,23 +10,11 @@ const StaticInfo = ({
     tabNames: Array<string>;
     tabPanels: Array<React.ReactNode>;
 }): JSX.Element => {
-    const router = useRouter();
-    const [tabIndex, setTabIndex] = React.useState(0);
-    React.useEffect(
-        () => {
-            router?.push(
-                {
-                    pathname: router.pathname,
-                    query: { path: [tabNames[tabIndex]] },
-                },
-                undefined,
-                { shallow: true },
-            );
-        },
-        [tabIndex], // eslint-disable-line react-hooks/exhaustive-deps
-    );
+    const [tabIndex, setTabIndex] = useQueryTabs('tab', tabNames, undefined, [0, 1]);
+
     return (
         <Tabs
+            defaultIndex={tabIndex}
             onChange={(index) => {
                 setTabIndex(index);
             }}
@@ -41,7 +28,7 @@ const StaticInfo = ({
                         <TabList>
                             {tabNames.map((tabName: string) => (
                                 <Tab
-                                    key={tabName}
+                                    key={toQuery(tabName)}
                                     data-testid={`${tabName}-tab`}
                                     whiteSpace="normal"
                                     wordBreak="break-word"
@@ -67,13 +54,6 @@ const StaticInfo = ({
             </Grid>
         </Tabs>
     );
-};
-
-export const getServerSideProps: GetServerSideProps = async (req) => {
-    const path = req.query.path?.[0] ?? null;
-    return {
-        props: { path },
-    };
 };
 
 export default StaticInfo;

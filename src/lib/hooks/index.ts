@@ -1,4 +1,4 @@
 import useCountdown from './use-countdown';
-import useTimeout from './use-timeout';
+import useQueryTabs, { toQuery } from './use-query-tabs';
 
-export { useTimeout, useCountdown };
+export { useCountdown, useQueryTabs, toQuery };
