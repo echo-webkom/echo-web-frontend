@@ -1,6 +1,6 @@
 import { Divider, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Wrap } from '@chakra-ui/react';
 import React from 'react';
-import { StudentGroup } from '../lib/api';
+import { GroupType, StudentGroup } from '../lib/api';
 import ErrorBox from './error-box';
 import StudentGroupView from './student-group-view';
 import { useQueryTabs, toQuery } from '../lib/hooks';
@@ -12,12 +12,12 @@ const StudentGroupSection = ({
 }: {
     studentGroups: Array<StudentGroup>;
     error: string;
-    groupType: string;
+    groupType: GroupType;
 }): JSX.Element => {
     const [tabIndex, setTabIndex] = useQueryTabs(
         groupType,
         studentGroups.map((sg) => sg.name),
-        [groupType],
+        [groupType, 'tab'],
         [],
     );
 

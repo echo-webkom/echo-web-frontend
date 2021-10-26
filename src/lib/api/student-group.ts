@@ -4,6 +4,8 @@ import { SanityAPI } from './api';
 import { emptyArrayOnNilDecoder } from './decoders';
 import handleError from './errors';
 
+export type GroupType = 'board' | 'suborg' | 'subgroup';
+
 export type Profile = decodeType<typeof profileDecoder>;
 const profileDecoder = record({
     name: string,
@@ -25,11 +27,11 @@ const studentGroupDecoder = record({
 
 export const StudentGroupAPI = {
     getStudentGroupsByType: async (
-        type: 'board' | 'suborg' | 'subgroup',
+        groupType: GroupType,
     ): Promise<{ studentGroups: Array<StudentGroup> | null; error: string | null }> => {
         try {
             const query = `
-                *[_type == "studentGroup" && groupType == "${type}" && !(_id in path('drafts.**'))] | order(name) {
+                *[_type == "studentGroup" && groupType == "${groupType}" && !(_id in path('drafts.**'))] | order(name) {
                     name,
                     info,
                     "roles": roles[] -> {

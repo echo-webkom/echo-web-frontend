@@ -15,9 +15,7 @@ const StaticInfo = ({
     return (
         <Tabs
             defaultIndex={tabIndex}
-            onChange={(index) => {
-                setTabIndex(index);
-            }}
+            onChange={(index) => setTabIndex(index)}
             isLazy
             orientation="vertical"
             data-testid="static-info"

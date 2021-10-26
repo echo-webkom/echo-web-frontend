@@ -36,16 +36,16 @@ const ForStudenterPage = ({
                 ]}
                 tabPanels={[
                     <StudentGroupSection
-                        key="undergrupper"
+                        key="subgroup"
                         studentGroups={subGroups}
                         error={subGroupsError}
-                        groupType="undergrupper"
+                        groupType="subgroup"
                     />,
                     <StudentGroupSection
-                        key="underorganisasjoner"
+                        key="suborg"
                         studentGroups={subOrgs}
                         error={subOrgsError}
-                        groupType="underorganisasjoner"
+                        groupType="suborg"
                     />,
                     <Markdown key="masterinfo" options={{ overrides: MapMarkdownChakra }}>
                         {masterinfo}
