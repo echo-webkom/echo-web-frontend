@@ -32,7 +32,7 @@ const useQueryTabs = (
                 query: {
                     // If current `tabIndex` is in `dontClearOn`, then also include
                     // other query parameters in the URL than `queryName`.
-                    ...(dontClearOn?.includes(tabIndex ?? false) || (dontClearOn?.length === 0 ?? false)
+                    ...((dontClearOn?.includes(tabIndex) ?? false) || (dontClearOn?.length === 0 ?? false)
                         ? {
                               // Get all current query parameters and return
                               // them in the same JSON object (`query`).
