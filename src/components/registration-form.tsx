@@ -62,6 +62,11 @@ const codeToStatus = (statusCode: number): 'success' | 'warning' | 'error' | 'in
         case 422:
             return 'warning';
 
+        // SERVICE_UNAVAILABLE
+        // Backend is down for maintenance.
+        case 503:
+            return 'error';
+
         // INTERNAL_SERVER_ERROR
         // Something has gone horribly wrong.
         default:

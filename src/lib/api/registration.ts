@@ -126,7 +126,16 @@ const RegistrationAPI = {
             if (axios.isAxiosError(err)) {
                 if (err.response) {
                     return {
-                        response: { ...genericError, code: 'InternalServerError' },
+                        response: {
+                            ...(err.response.status === 503
+                                ? {
+                                      title: 'Tjenesten er midlertidlig utilgjengelig.',
+                                      desc: 'Vennligst prøv igjen litt senere',
+                                      date: undefined,
+                                      code: 'ServiceUnavailable',
+                                  }
+                                : { ...genericError, code: 'InternalServerError' }),
+                        },
                         statusCode: err.response.status,
                     };
                 }
