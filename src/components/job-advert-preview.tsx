@@ -15,13 +15,15 @@ import NextLink from 'next/link';
 import React from 'react';
 import { JobAdvert } from '../lib/api';
 
-const translateJobType = (jobType: 'fulltime' | 'parttime' | 'internship'): string => {
+const translateJobType = (jobType: 'fulltime' | 'parttime' | 'internship' | 'summerjob'): string => {
     switch (jobType) {
         case 'fulltime':
             return 'Fulltid';
         case 'parttime':
             return 'Deltid';
         case 'internship':
+            return 'Internship';
+        case 'summerjob':
             return 'Sommerjobb';
     }
 };
@@ -53,12 +55,18 @@ const JobAdvertPreview = ({ jobAdvert }: { jobAdvert: JobAdvert }): JSX.Element 
                                 <Tag colorScheme="teal" variant="subtle">
                                     {translateJobType(jobAdvert.jobType)}
                                 </Tag>
-                                <Tag colorScheme="teal" variant="solid">
-                                    {jobAdvert.location}
+                                {jobAdvert.locations.map((location: string, index: number) => (
+                                    <Tag colorScheme="teal" variant="solid" key={`${location}-${index}`}>
+                                        {location}
+                                    </Tag>
+                                ))}
+                                <Tag colorScheme="teal" variant="outline">
+                                    {jobAdvert.degreeYears.length === 1
+                                        ? `${String(jobAdvert.degreeYears[0])}. trinn`
+                                        : `${String(jobAdvert.degreeYears.sort().slice(0, -1).join(', '))} og ${String(
+                                              jobAdvert.degreeYears.slice(-1),
+                                          )} . trinn`}
                                 </Tag>
-                                <Tag colorScheme="teal" variant="outline">{`${Math.min(
-                                    ...jobAdvert.degreeYears,
-                                )}. - ${Math.max(...jobAdvert.degreeYears)}. trinn`}</Tag>
                                 <Spacer />
                             </Wrap>
                             <Tag mt=".5rem">{`Søknadsfrist: ${format(
