@@ -1,5 +1,16 @@
 import { ParsedUrlQuery } from 'querystring';
-import { Center, Divider, Grid, GridItem, Heading, LinkBox, LinkOverlay, Spinner, VStack } from '@chakra-ui/react';
+import {
+    Button,
+    Center,
+    Divider,
+    Grid,
+    GridItem,
+    Heading,
+    LinkBox,
+    LinkOverlay,
+    Spinner,
+    VStack,
+} from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import Markdown from 'markdown-to-jsx';
@@ -40,8 +51,14 @@ const JobAdvertPage = ({ jobAdvert, error }: Props): JSX.Element => {
             {jobAdvert && !router.isFallback && !error && (
                 <>
                     <SEO title={jobAdvert.companyName} />
+
                     <Grid templateColumns={['repeat(1, 1fr)', null, null, 'repeat(4, 1fr)']} gap="4">
                         <GridItem colSpan={1} colStart={1} rowStart={[2, null, null, 1]} as={Section}>
+                            <NextLink href="/for-studenter?t=Stillingsannonser">
+                                <Button mb="5" w="100%">
+                                    Tilbake
+                                </Button>
+                            </NextLink>
                             <LinkBox mb="1em">
                                 <NextLink href={jobAdvert.advertLink} passHref>
                                     <LinkOverlay isExternal>

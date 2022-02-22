@@ -46,6 +46,7 @@ const memberDecoder = record({
 const studentGroupDecoder = record({
     name: string,
     slug: string,
+    groupType: string,
     info: string,
     members: (value) => emptyArrayOnNilDecoder(memberDecoder, value),
 });

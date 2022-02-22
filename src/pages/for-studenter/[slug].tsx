@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring';
-import { Center, Divider, Heading, Spinner, Wrap, WrapItem } from '@chakra-ui/react';
+import { Button, Center, Divider, Heading, LinkOverlay, Spinner, Wrap, WrapItem } from '@chakra-ui/react';
 import Markdown from 'markdown-to-jsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -19,6 +19,21 @@ interface Props {
 const StudentGroupPage = ({ studentGroup, error }: Props): JSX.Element => {
     const router = useRouter();
 
+    // type === 'subgroup' || type === 'suborg' || type === 'board' || type === 'intgroup'
+    const getBackUrl = () => {
+        const a: string = '/for-studenter?t=';
+        switch (studentGroup?.groupType) {
+            case 'suborg':
+                return a + 'Underorganisasjoner';
+            case 'board':
+                return '/om-oss';
+            case 'intgroup':
+                return a + 'Interessegrupper';
+            default:
+                return a;
+        }
+    };
+
     return (
         <>
             {router.isFallback && (
@@ -31,6 +46,9 @@ const StudentGroupPage = ({ studentGroup, error }: Props): JSX.Element => {
                 <>
                     <SEO title={studentGroup.name} />
                     <Section>
+                        <LinkOverlay href={getBackUrl()}>
+                            <Button pos="absolute">Tilbake</Button>
+                        </LinkOverlay>
                         <Heading textAlign="center" size="2xl" pb="2rem">
                             {studentGroup.name}
                         </Heading>

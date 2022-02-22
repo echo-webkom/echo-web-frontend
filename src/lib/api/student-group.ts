@@ -27,6 +27,7 @@ const StudentGroupAPI = {
                     name,
                     "slug": slug.current,
                     info,
+                    groupType,
                     "members": members[] {
                         role,
                         "profile": profile -> {
@@ -59,6 +60,7 @@ const StudentGroupAPI = {
                 *[_type == "studentGroup" && slug.current == "${slug}" && !(_id in path('drafts.**'))] | order(name) {
                     name,
                     "slug": slug.current,
+                    groupType,
                     info,
                     "members": members[] {
                         role,
