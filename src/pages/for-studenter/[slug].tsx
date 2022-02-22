@@ -19,7 +19,6 @@ interface Props {
 const StudentGroupPage = ({ studentGroup, error }: Props): JSX.Element => {
     const router = useRouter();
 
-    // type === 'subgroup' || type === 'suborg' || type === 'board' || type === 'intgroup'
     const getBackUrl = () => {
         const a: string = '/for-studenter?t=';
         switch (studentGroup?.groupType) {
