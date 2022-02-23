@@ -23,10 +23,9 @@ import { BiCategory } from 'react-icons/bi';
 import { ImLocation } from 'react-icons/im';
 import { FaUniversity } from 'react-icons/fa';
 import { RiArrowGoBackFill, RiTimeLine } from 'react-icons/ri';
-import ErrorBox from '../../components/error-box';
 import Section from '../../components/section';
 import SEO from '../../components/seo';
-import { JobAdvert, JobAdvertAPI } from '../../lib/api';
+import { isErrorMessage, JobAdvert, JobAdvertAPI } from '../../lib/api';
 import MapMarkdownChakra from '../../markdown';
 import IconText from '../../components/icon-text';
 import { translateJobType } from '../../components/job-advert-preview';
@@ -34,10 +33,9 @@ import ButtonLink from '../../components/button-link';
 
 interface Props {
     jobAdvert: JobAdvert | null;
-    error: string | null;
 }
 
-const JobAdvertPage = ({ jobAdvert, error }: Props): JSX.Element => {
+const JobAdvertPage = ({ jobAdvert }: Props): JSX.Element => {
     const router = useRouter();
 
     return (
@@ -47,8 +45,7 @@ const JobAdvertPage = ({ jobAdvert, error }: Props): JSX.Element => {
                     <Spinner />
                 </Center>
             )}
-            {error && !router.isFallback && !jobAdvert && <ErrorBox error={error} />}
-            {jobAdvert && !router.isFallback && !error && (
+            {jobAdvert && !router.isFallback && (
                 <>
                     <SEO title={jobAdvert.companyName} />
 
@@ -141,17 +138,19 @@ interface Params extends ParsedUrlQuery {
 
 const getStaticProps: GetStaticProps = async (context) => {
     const { slug } = context.params as Params;
-    const { jobAdvert, error } = await JobAdvertAPI.getJobAdvertBySlug(slug);
+    const jobAdvert = await JobAdvertAPI.getJobAdvertBySlug(slug);
 
-    if (error === '404') {
-        return {
-            notFound: true,
-        };
+    if (isErrorMessage(jobAdvert)) {
+        if (jobAdvert.message === '404') {
+            return {
+                notFound: true,
+            };
+        }
+        throw new Error(jobAdvert.message);
     }
 
     const props: Props = {
         jobAdvert,
-        error,
     };
 
     return { props };

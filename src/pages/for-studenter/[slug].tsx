@@ -6,19 +6,17 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import NextLink from 'next/link';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import ErrorBox from '../../components/error-box';
 import MemberProfile from '../../components/member-profile';
 import SEO from '../../components/seo';
 import Section from '../../components/section';
-import { StudentGroup, StudentGroupAPI, Member } from '../../lib/api';
+import { isErrorMessage, StudentGroup, StudentGroupAPI, Member } from '../../lib/api';
 import MapMarkdownChakra from '../../markdown';
 
 interface Props {
-    studentGroup: StudentGroup | null;
-    error: string | null;
+    studentGroup: StudentGroup;
 }
 
-const StudentGroupPage = ({ studentGroup, error }: Props): JSX.Element => {
+const StudentGroupPage = ({ studentGroup }: Props): JSX.Element => {
     const router = useRouter();
 
     const getBackUrl = () => {
@@ -42,8 +40,7 @@ const StudentGroupPage = ({ studentGroup, error }: Props): JSX.Element => {
                     <Spinner />
                 </Center>
             )}
-            {error && !router.isFallback && !studentGroup && <ErrorBox error={error} />}
-            {studentGroup && !router.isFallback && !error && (
+            {!router.isFallback && (
                 <>
                     <SEO title={studentGroup.name} />
                     <Section>
@@ -97,17 +94,19 @@ interface Params extends ParsedUrlQuery {
 
 const getStaticProps: GetStaticProps = async (context) => {
     const { slug } = context.params as Params;
-    const { studentGroup, error } = await StudentGroupAPI.getStudentGroupBySlug(slug);
+    const studentGroup = await StudentGroupAPI.getStudentGroupBySlug(slug);
 
-    if (error === '404') {
-        return {
-            notFound: true,
-        };
+    if (isErrorMessage(studentGroup)) {
+        if (studentGroup.message === '404') {
+            return {
+                notFound: true,
+            };
+        }
+        throw new Error(studentGroup.message);
     }
 
     const props: Props = {
         studentGroup,
-        error,
     };
 
     return {
