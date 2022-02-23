@@ -1,9 +1,11 @@
 import { ParsedUrlQuery } from 'querystring';
-import { Button, Center, Divider, Heading, LinkOverlay, Spinner, Wrap, WrapItem } from '@chakra-ui/react';
+import { Button, Center, Divider, Heading, Spinner, Wrap, WrapItem, Flex } from '@chakra-ui/react';
 import Markdown from 'markdown-to-jsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
+import NextLink from 'next/link';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 import ErrorBox from '../../components/error-box';
 import MemberProfile from '../../components/member-profile';
 import SEO from '../../components/seo';
@@ -45,9 +47,17 @@ const StudentGroupPage = ({ studentGroup, error }: Props): JSX.Element => {
                 <>
                     <SEO title={studentGroup.name} />
                     <Section>
-                        <LinkOverlay href={getBackUrl()}>
-                            <Button pos="absolute">Tilbake</Button>
-                        </LinkOverlay>
+                        <Flex justify={['center', null, 'left']}>
+                            <NextLink href={getBackUrl()}>
+                                <Button
+                                    leftIcon={<RiArrowGoBackFill />}
+                                    mb="5"
+                                    pos={['static', null, null, null, 'absolute']}
+                                >
+                                    Tilbake
+                                </Button>
+                            </NextLink>
+                        </Flex>
                         <Heading textAlign="center" size="2xl" pb="2rem">
                             {studentGroup.name}
                         </Heading>

@@ -1,9 +1,10 @@
-import { Center, Divider, Grid, GridItem, Heading, LinkBox, LinkOverlay, Text } from '@chakra-ui/react';
+import { Center, Divider, Grid, GridItem, Heading, LinkBox, Button, LinkOverlay, Text } from '@chakra-ui/react';
 import { differenceInHours, format, isAfter, isBefore, parseISO } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import React from 'react';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 import { Happening, HappeningType, SpotRangeCount } from '../lib/api';
 import Article from './article';
 import Countdown from './countdown';
@@ -27,6 +28,13 @@ const HappeningUI = ({ happening, backendUrl, spotRangeCounts, date }: Props): J
     return (
         <Grid templateColumns={['repeat(1, 1fr)', null, null, 'repeat(4, 1fr)']} gap="4">
             <GridItem colSpan={1} as={Section}>
+                <Center>
+                    <NextLink {...(happening.happeningType === 'BEDPRES' ? { href: '/bedpres' } : { href: '/event' })}>
+                        <Button leftIcon={<RiArrowGoBackFill />} mb="5" w={['300px', null, null, '100%']}>
+                            Tilbake
+                        </Button>
+                    </NextLink>
+                </Center>
                 <>
                     {happening.happeningType === HappeningType.BEDPRES && happening.companyLink && happening.logoUrl && (
                         <LinkBox mb="1em">

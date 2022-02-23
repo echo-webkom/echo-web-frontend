@@ -22,7 +22,7 @@ import React from 'react';
 import { BiCategory } from 'react-icons/bi';
 import { ImLocation } from 'react-icons/im';
 import { FaUniversity } from 'react-icons/fa';
-import { RiTimeLine } from 'react-icons/ri';
+import { RiArrowGoBackFill, RiTimeLine } from 'react-icons/ri';
 import ErrorBox from '../../components/error-box';
 import Section from '../../components/section';
 import SEO from '../../components/seo';
@@ -54,11 +54,13 @@ const JobAdvertPage = ({ jobAdvert, error }: Props): JSX.Element => {
 
                     <Grid templateColumns={['repeat(1, 1fr)', null, null, 'repeat(4, 1fr)']} gap="4">
                         <GridItem colSpan={1} colStart={1} rowStart={[2, null, null, 1]} as={Section}>
-                            <NextLink href="/for-studenter?t=Stillingsannonser">
-                                <Button mb="5" w="100%">
-                                    Tilbake
-                                </Button>
-                            </NextLink>
+                            <Center>
+                                <NextLink href="/for-studenter?t=Stillingsannonser">
+                                    <Button leftIcon={<RiArrowGoBackFill />} mb="5" w={['300px', null, null, '100%']}>
+                                        Tilbake
+                                    </Button>
+                                </NextLink>
+                            </Center>
                             <LinkBox mb="1em">
                                 <NextLink href={jobAdvert.advertLink} passHref>
                                     <LinkOverlay isExternal>
