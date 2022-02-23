@@ -29,7 +29,10 @@ const HappeningUI = ({ happening, backendUrl, spotRangeCounts, date }: Props): J
         <Grid templateColumns={['repeat(1, 1fr)', null, null, 'repeat(4, 1fr)']} gap="4">
             <GridItem colSpan={1} as={Section}>
                 <Center>
-                    <NextLink {...(happening.happeningType === 'BEDPRES' ? { href: '/bedpres' } : { href: '/event' })}>
+                    <NextLink
+                        {...(happening.happeningType === 'BEDPRES' ? { href: '/bedpres' } : { href: '/event' })}
+                        passHref
+                    >
                         <Button leftIcon={<RiArrowGoBackFill />} mb="5" w={['300px', null, null, '100%']}>
                             Tilbake
                         </Button>

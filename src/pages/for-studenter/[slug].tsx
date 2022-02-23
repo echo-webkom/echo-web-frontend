@@ -21,7 +21,7 @@ const StudentGroupPage = ({ studentGroup }: Props): JSX.Element => {
 
     const getBackUrl = () => {
         const a: string = '/for-studenter?t=';
-        switch (studentGroup?.groupType) {
+        switch (studentGroup.groupType) {
             case 'suborg':
                 return a + 'Underorganisasjoner';
             case 'board':
@@ -45,7 +45,7 @@ const StudentGroupPage = ({ studentGroup }: Props): JSX.Element => {
                     <SEO title={studentGroup.name} />
                     <Section>
                         <Flex justify={['center', null, 'left']}>
-                            <NextLink href={getBackUrl()}>
+                            <NextLink href={getBackUrl()} passHref>
                                 <Button
                                     leftIcon={<RiArrowGoBackFill />}
                                     mb="5"
