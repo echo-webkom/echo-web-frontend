@@ -22,7 +22,7 @@ import React from 'react';
 import { BiCategory } from 'react-icons/bi';
 import { ImLocation } from 'react-icons/im';
 import { FaUniversity } from 'react-icons/fa';
-import { RiArrowGoBackFill, RiTimeLine } from 'react-icons/ri';
+import { RiArrowGoBackFill, RiGalleryUploadLine, RiTimeLine } from 'react-icons/ri';
 import Section from '../../components/section';
 import SEO from '../../components/seo';
 import { isErrorMessage, JobAdvert, JobAdvertAPI } from '../../lib/api';
@@ -76,6 +76,12 @@ const JobAdvertPage = ({ jobAdvert }: Props): JSX.Element => {
                                 </NextLink>
                             </LinkBox>
                             <VStack alignItems="left" spacing={3}>
+                                <IconText
+                                    icon={RiGalleryUploadLine}
+                                    text={`Publisert: ${format(new Date(jobAdvert._createdAt), 'dd. MMM yyyy', {
+                                        locale: nb,
+                                    })}`}
+                                />
                                 <IconText icon={BiCategory} text={translateJobType(jobAdvert.jobType)} />
                                 <IconText icon={ImLocation} text={jobAdvert.locations.join(' - ')} />
                                 <IconText
