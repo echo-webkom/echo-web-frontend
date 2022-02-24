@@ -52,11 +52,14 @@ const JobAdvertPage = ({ jobAdvert }: Props): JSX.Element => {
                     <Grid templateColumns={['repeat(1, 1fr)', null, null, 'repeat(4, 1fr)']} gap="4">
                         <GridItem colSpan={1} colStart={1} rowStart={[2, null, null, 1]} as={Section}>
                             <Center>
-                                <NextLink href="/for-studenter?t=Stillingsannonser" passHref>
-                                    <Button leftIcon={<RiArrowGoBackFill />} mb="5" w={['300px', null, null, '100%']}>
-                                        Tilbake
-                                    </Button>
-                                </NextLink>
+                                <Button
+                                    leftIcon={<RiArrowGoBackFill />}
+                                    mb="5"
+                                    w={['300px', null, null, '100%']}
+                                    onClick={() => router.back()}
+                                >
+                                    Tilbake
+                                </Button>
                             </Center>
                             <LinkBox mb="1em">
                                 <NextLink href={jobAdvert.advertLink} passHref>

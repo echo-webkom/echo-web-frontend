@@ -4,6 +4,7 @@ import { nb } from 'date-fns/locale';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import React from 'react';
+import { useRouter } from 'next/router';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { Happening, HappeningType, SpotRangeCount } from '../lib/api';
 import Article from './article';
@@ -20,6 +21,8 @@ interface Props {
 }
 
 const HappeningUI = ({ happening, backendUrl, spotRangeCounts, date }: Props): JSX.Element => {
+    const router = useRouter();
+
     if (!happening) return <></>;
 
     const regDate = happening.registrationDate ? parseISO(happening.registrationDate) : new Date(date);
@@ -29,14 +32,14 @@ const HappeningUI = ({ happening, backendUrl, spotRangeCounts, date }: Props): J
         <Grid templateColumns={['repeat(1, 1fr)', null, null, 'repeat(4, 1fr)']} gap="4">
             <GridItem colSpan={1} as={Section}>
                 <Center>
-                    <NextLink
-                        {...(happening.happeningType === 'BEDPRES' ? { href: '/bedpres' } : { href: '/event' })}
-                        passHref
+                    <Button
+                        leftIcon={<RiArrowGoBackFill />}
+                        mb="5"
+                        w={['300px', null, null, '100%']}
+                        onClick={() => router.back()}
                     >
-                        <Button leftIcon={<RiArrowGoBackFill />} mb="5" w={['300px', null, null, '100%']}>
-                            Tilbake
-                        </Button>
-                    </NextLink>
+                        Tilbake
+                    </Button>
                 </Center>
                 <>
                     {happening.happeningType === HappeningType.BEDPRES && happening.companyLink && happening.logoUrl && (

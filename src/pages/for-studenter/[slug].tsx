@@ -4,7 +4,6 @@ import Markdown from 'markdown-to-jsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import NextLink from 'next/link';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import MemberProfile from '../../components/member-profile';
 import SEO from '../../components/seo';
@@ -19,20 +18,6 @@ interface Props {
 const StudentGroupPage = ({ studentGroup }: Props): JSX.Element => {
     const router = useRouter();
 
-    const getBackUrl = () => {
-        const a: string = '/for-studenter?t=';
-        switch (studentGroup.groupType) {
-            case 'suborg':
-                return a + 'Underorganisasjoner';
-            case 'board':
-                return '/om-oss';
-            case 'intgroup':
-                return a + 'Interessegrupper';
-            default:
-                return a;
-        }
-    };
-
     return (
         <>
             {router.isFallback && (
@@ -45,15 +30,14 @@ const StudentGroupPage = ({ studentGroup }: Props): JSX.Element => {
                     <SEO title={studentGroup.name} />
                     <Section>
                         <Flex justify={['center', null, 'left']}>
-                            <NextLink href={getBackUrl()} passHref>
-                                <Button
-                                    leftIcon={<RiArrowGoBackFill />}
-                                    mb="5"
-                                    pos={['static', null, null, null, 'absolute']}
-                                >
-                                    Tilbake
-                                </Button>
-                            </NextLink>
+                            <Button
+                                leftIcon={<RiArrowGoBackFill />}
+                                mb="5"
+                                pos={['static', null, null, null, 'absolute']}
+                                onClick={() => router.back()}
+                            >
+                                Tilbake
+                            </Button>
                         </Flex>
                         <Heading textAlign="center" size="2xl" pb="2rem">
                             {studentGroup.name}
