@@ -13,7 +13,7 @@ const ButtonLink = ({ linkTo, isExternal = false, ...props }: Props): JSX.Elemen
     const textColor = useColorModeValue('button.light.text', 'button.dark.text');
 
     return (
-        <LinkBox>
+        <LinkBox data-cy={linkTo}>
             <NextLink href={linkTo} passHref>
                 <LinkOverlay isExternal={isExternal}>
                     <Button
@@ -23,7 +23,6 @@ const ButtonLink = ({ linkTo, isExternal = false, ...props }: Props): JSX.Elemen
                         _active={{ borderColor: active }}
                         fontSize="xl"
                         borderRadius="0.5rem"
-                        data-cy={linkTo}
                         {...props}
                     />
                 </LinkOverlay>
