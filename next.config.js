@@ -25,6 +25,7 @@ module.exports = withPWA({
                 destination: '/event/:path',
                 permanent: true,
             },
+            { source: '/bedpres/:path', destination: '/event/:path', permanent: true },
         ];
     },
     reactStrictMode: true,
