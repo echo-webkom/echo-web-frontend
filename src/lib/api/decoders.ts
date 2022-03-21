@@ -193,13 +193,12 @@ const bannerDecoder = record({
     isExternal: boolean,
 });
 
-const userDecoder = record({
-    email: string,
+const backendUserDecoder = record({
     degree: union(degreeDecoder, nil),
     degreeYear: union(number, nil),
 });
 
-const userWithNameDecoder = record({
+const userDecoder = record({
     email: string,
     name: string,
     degree: union(degreeDecoder, nil),
@@ -227,6 +226,6 @@ export {
     happeningTypeDecoder,
     bannerDecoder,
     registrationCountDecoder,
+    backendUserDecoder,
     userDecoder,
-    userWithNameDecoder,
 };

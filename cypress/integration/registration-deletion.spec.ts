@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { happenings } from '../fixtures/happening.json';
 
-const registrationRoute = 'registration';
-
 describe('Happening registration', () => {
     describe('720p res', () => {
         beforeEach(() => {
@@ -13,7 +11,7 @@ describe('Happening registration', () => {
             for (let rows = 24; rows > 0; rows--) {
                 describe('Happening registration deletion', () => {
                     beforeEach(() => {
-                        cy.visit(`/${registrationRoute}/${slug}`);
+                        cy.visit(`/happening/${slug}/registrations`);
                     });
 
                     it('Registrations are deleted properly', () => {
@@ -29,7 +27,7 @@ describe('Happening registration', () => {
 
         after(() => {
             for (const { slug } of happenings) {
-                cy.visit(`/${registrationRoute}/${slug}`);
+                cy.visit(`/happening/${slug}/registrations`);
                 cy.get('[data-cy=no-regs]').should('be.visible');
                 cy.get('[data-cy=no-regs]').should('contain.text', 'Ingen påmeldinger enda');
             }
