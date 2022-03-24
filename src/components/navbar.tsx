@@ -60,7 +60,7 @@ const NavBar = ({ isOpen, onClose, btnRef }: Props): JSX.Element => {
                         <DrawerHeader fontSize="2xl" as={Heading}>
                             Navigasjon
                         </DrawerHeader>
-                        <DrawerBody>
+                        <DrawerBody onClick={onClose}>
                             <NavLinks />
                         </DrawerBody>
                     </DrawerContent>
