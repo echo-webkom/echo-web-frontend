@@ -1,0 +1,36 @@
+import { Flex, Stack, Text } from '@chakra-ui/react';
+import { format, isPast } from 'date-fns';
+import { nb } from 'date-fns/locale';
+import { BiCalendar } from 'react-icons/bi';
+import { Happening } from '../lib/api';
+
+interface Props {
+    event: Happening;
+}
+
+const HappeningKeyInfo = ({ event }: Props): JSX.Element => {
+    return (
+        <Stack textAlign="right">
+            <Flex alignItems="center" justifyContent="flex-end">
+                <BiCalendar />
+                <Text ml="1" fontWeight="bold">
+                    {format(new Date(event.date), 'dd. MMM yyyy', { locale: nb })}
+                </Text>
+            </Flex>
+
+            {event.registrationDate &&
+                (isPast(new Date(event.registrationDate)) ? (
+                    <Text fontSize="1rem">x/y påmeldt</Text>
+                ) : (
+                    <Text fontSize="1rem">
+                        Påmelding{' '}
+                        <span style={{ whiteSpace: 'nowrap' }}>
+                            {format(new Date(event.registrationDate), 'dd. MMM yyyy', { locale: nb })}
+                        </span>
+                    </Text>
+                ))}
+        </Stack>
+    );
+};
+
+export default HappeningKeyInfo;

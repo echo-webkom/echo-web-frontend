@@ -1,14 +1,14 @@
 import fs from 'fs';
-import { LinkOverlay, LinkBox, Heading, Grid, GridItem, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { Grid, GridItem, Heading, LinkBox, LinkOverlay, useBreakpointValue, VStack } from '@chakra-ui/react';
 import { isBefore, isFuture } from 'date-fns';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import React from 'react';
 import EntryBox from '../components/entry-box';
 import Hsp from '../components/hsp';
-import SEO from '../components/seo';
 import Section from '../components/section';
-import { BannerAPI, Banner, HappeningAPI, Happening, HappeningType, Post, PostAPI, isErrorMessage } from '../lib/api';
+import SEO from '../components/seo';
+import { Banner, BannerAPI, Happening, HappeningAPI, HappeningType, isErrorMessage, Post, PostAPI } from '../lib/api';
 import getRssXML from '../lib/generate-rss-feed';
 
 const IndexPage = ({
@@ -97,11 +97,13 @@ const IndexPage = ({
     );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-    const bedpresesResponse = await HappeningAPI.getHappeningsByType(0, HappeningType.BEDPRES);
-    const eventsResponse = await HappeningAPI.getHappeningsByType(0, HappeningType.EVENT);
-    const postsResponse = await PostAPI.getPosts(0);
-    const bannerResponse = await BannerAPI.getBanner();
+export const getServerSideProps: GetServerSideProps = async () => {
+    const [bedpresesResponse, eventsResponse, postsResponse, bannerResponse] = await Promise.all([
+        HappeningAPI.getHappeningsByType(0, HappeningType.BEDPRES),
+        HappeningAPI.getHappeningsByType(0, HappeningType.EVENT),
+        PostAPI.getPosts(0),
+        BannerAPI.getBanner(),
+    ]);
 
     if (isErrorMessage(bedpresesResponse)) throw new Error(bedpresesResponse.message);
     if (isErrorMessage(eventsResponse)) throw new Error(eventsResponse.message);
