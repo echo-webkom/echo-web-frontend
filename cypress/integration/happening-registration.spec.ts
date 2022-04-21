@@ -4,19 +4,24 @@ import users from '../fixtures/users.json';
 import { happenings } from '../fixtures/happening.json';
 
 const checkSubmitRegistration = (degree: string, degreeYear: number) => {
-    cy.get('[data-cy=reg-btn]').click();
+    cy.get('[data-cy=reg-btn]').click({ force: true });
+
+    cy.wait(1000);
+
     cy.get('[data-cy=reg-form]').should('be.visible');
 
     cy.get('input[name=email]').type(`${degree}${degreeYear}@test.com`);
     cy.get('input[name=firstName]').type('Test');
     cy.get('input[name=lastName]').type('McTest');
-    cy.get('select[name=degree]').select(degree);
+    cy.get('select[name=degree]').select(degree, { force: true });
     cy.get('input[name=degreeYear]').check(degreeYear.toString(), { force: true });
     cy.get('input[id=terms1]').check({ force: true });
     cy.get('input[id=terms2]').check({ force: true });
     cy.get('input[id=terms3]').check({ force: true });
 
-    cy.get('button[type=submit]').click();
+    cy.get('[data-cy=reg-submit-btn]').click({ force: true });
+
+    cy.wait(1000);
 
     cy.get('li[class=chakra-toast]').contains('Påmeldingen din er registrert!');
 };
@@ -34,7 +39,10 @@ describe('Happening registration', () => {
                 });
 
                 it('Popup form appears correctly', () => {
-                    cy.get('[data-cy=reg-btn]').click();
+                    cy.get('[data-cy=reg-btn]').click({ force: true });
+
+                    cy.wait(1000);
+
                     cy.get('[data-cy=reg-form]').should('be.visible');
 
                     cy.get('input[name=email]').should('be.visible');

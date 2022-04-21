@@ -12,7 +12,7 @@ describe('Entry Box', () => {
 
                 cy.visit('/');
                 cy.get('[data-cy=entry-box-bedpres]').within(() => {
-                    cy.get(`[data-cy="${bedpresPage}"]`).click();
+                    cy.get(`[data-cy="${bedpresPage}"]`).click({ force: true });
                     cy.url().should('include', bedpresPage);
                 });
             });
@@ -24,7 +24,7 @@ describe('Entry Box', () => {
 
                 cy.visit('/');
                 cy.get('[data-cy=entry-box-event]').within(() => {
-                    cy.get(`[data-cy="${eventPage}"]`).click();
+                    cy.get(`[data-cy="${eventPage}"]`).click({ force: true });
                     cy.url().should('include', eventPage);
                 });
             });

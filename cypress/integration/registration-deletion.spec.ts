@@ -19,9 +19,9 @@ describe('Happening registration', () => {
                     it('Registrations are deleted properly', () => {
                         cy.get('[data-cy=reg-row]').should('have.length', rows);
                         cy.get('[data-cy=delete-button]').first().should('be.visible');
-                        cy.get('[data-cy=delete-button]').first().click();
+                        cy.get('[data-cy=delete-button]').first().click({ force: true });
 
-                        cy.get('[data-cy=confirm-delete-button]').click();
+                        cy.get('[data-cy=confirm-delete-button]').click({ force: true });
                     });
                 });
             }

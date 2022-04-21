@@ -246,7 +246,7 @@ const RegistrationForm = ({ happening, regVerifyToken, type, backendUrl }: Props
                                 </VStack>
                             </ModalBody>
                             <ModalFooter>
-                                <Button type="submit" mr={3} colorScheme="teal">
+                                <Button type="submit" mr={3} colorScheme="teal" data-cy="reg-submit-btn">
                                     Send inn
                                 </Button>
                                 <Button onClick={onClose}>Lukk</Button>
