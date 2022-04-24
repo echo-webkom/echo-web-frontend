@@ -188,6 +188,13 @@ const bannerDecoder = record({
     isExternal: boolean,
 });
 
+const userDecoder = record({
+    email: string,
+    name: string,
+    grade: union(number, nil),
+    degree: union(degreeDecoder, nil),
+});
+
 export {
     emptyArrayOnNilDecoder,
     slugDecoder,
@@ -208,4 +215,5 @@ export {
     happeningDecoder,
     happeningTypeDecoder,
     bannerDecoder,
+    userDecoder,
 };
