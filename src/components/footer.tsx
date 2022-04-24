@@ -1,5 +1,15 @@
-import { Icon, LinkBox, LinkOverlay, SimpleGrid, Text, useColorModeValue, Wrap, WrapItem } from '@chakra-ui/react';
-import Image from 'next/image';
+import {
+    Icon,
+    LinkBox,
+    LinkOverlay,
+    SimpleGrid,
+    Text,
+    useColorModeValue,
+    Wrap,
+    WrapItem,
+    Image,
+    Center,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaFacebook, FaGithub, FaInstagram, FaCommentDots } from 'react-icons/fa';
@@ -7,6 +17,7 @@ import { FaFacebook, FaGithub, FaInstagram, FaCommentDots } from 'react-icons/fa
 const echoLogoWhite = '/echo-logo-text-only-white-no-padding-bottom.png';
 const sanityLogo = '/sanity-logo.svg';
 const vercelLogo = '/powered-by-vercel.svg';
+const bekkLogo = '/bekk.png';
 
 const Footer = (): JSX.Element => {
     const color = useColorModeValue('highlight.light.primary', 'highlight.dark.primary');
@@ -32,41 +43,56 @@ const Footer = (): JSX.Element => {
                 px="1em"
                 data-testid="footer"
             >
-                <SimpleGrid columns={[4, 4, 2, 4, 4]} spacing="4">
-                    <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
-                        <NextLink href="https://facebook.com/groups/informatikk" passHref>
-                            <LinkOverlay isExternal aria-label="Link til Facebook">
-                                <Icon as={FaFacebook} w={12} h={12} />
-                            </LinkOverlay>
-                        </NextLink>
-                    </LinkBox>
-                    <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
-                        <NextLink href="https://github.com/echo-webkom/echo.uib.no" passHref>
-                            <LinkOverlay isExternal aria-label="Link til GitHub">
-                                <Icon as={FaGithub} w={12} h={12} />
-                            </LinkOverlay>
-                        </NextLink>
-                    </LinkBox>
-                    <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
-                        <NextLink
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSey2XfQijRQNvoc8-y3DaufbPaN33SdRBrITrcq87s7DyG6pg/viewform"
-                            passHref
-                        >
-                            <LinkOverlay isExternal aria-label="Tilbakemeldingsskjema">
-                                <Icon as={FaCommentDots} w={12} h={12} />
-                            </LinkOverlay>
-                        </NextLink>
-                    </LinkBox>
-                    <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
-                        <NextLink href="https://instagram.com/echo_uib" passHref>
-                            <LinkOverlay isExternal aria-label="Link til Instagram">
-                                <Icon as={FaInstagram} w={12} h={12} />
-                            </LinkOverlay>
-                        </NextLink>
-                    </LinkBox>
+                <SimpleGrid columns={1} alignItems="center" rowGap="15px">
+                    <Center>
+                        <Image alt="echo" objectFit="contain" maxH="100px" src={echoLogoWhite} />
+                    </Center>
+                    <SimpleGrid columns={[4, 4, 2, 4, 4]} spacing="4">
+                        <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
+                            <NextLink href="https://facebook.com/groups/informatikk" passHref>
+                                <LinkOverlay isExternal aria-label="Link til Facebook">
+                                    <Icon as={FaFacebook} w={10} h={10} />
+                                </LinkOverlay>
+                            </NextLink>
+                        </LinkBox>
+                        <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
+                            <NextLink href="https://github.com/echo-webkom/echo.uib.no" passHref>
+                                <LinkOverlay isExternal aria-label="Link til GitHub">
+                                    <Icon as={FaGithub} w={10} h={10} />
+                                </LinkOverlay>
+                            </NextLink>
+                        </LinkBox>
+                        <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
+                            <NextLink
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSey2XfQijRQNvoc8-y3DaufbPaN33SdRBrITrcq87s7DyG6pg/viewform"
+                                passHref
+                            >
+                                <LinkOverlay isExternal aria-label="Tilbakemeldingsskjema">
+                                    <Icon as={FaCommentDots} w={10} h={10} />
+                                </LinkOverlay>
+                            </NextLink>
+                        </LinkBox>
+                        <LinkBox transition=".1s ease-out" _hover={{ transform: 'scale(1.05)' }} color={color}>
+                            <NextLink href="https://instagram.com/echo_uib" passHref>
+                                <LinkOverlay isExternal aria-label="Link til Instagram">
+                                    <Icon as={FaInstagram} w={10} h={10} />
+                                </LinkOverlay>
+                            </NextLink>
+                        </LinkBox>
+                    </SimpleGrid>
                 </SimpleGrid>
-                <SimpleGrid columns={1} alignItems="center" display={['none', 'block', 'block']}>
-                    <Image alt="echo" width={145.15} height={65} src={echoLogoWhite} />
+
+                <SimpleGrid columns={[1, 1]} alignItems="center" rowGap="8px">
+                    <Text fontSize="sm" color="white" m={0} textAlign="center" fontWeight="bold">
+                        Hovedsamarbeidspartner
+                    </Text>
+                    <LinkBox m={0}>
+                        <NextLink href="https://bekk.no" passHref>
+                            <LinkOverlay isExternal>
+                                <Image alt="bekk" objectFit="contain" maxH="58px" src={bekkLogo} />
+                            </LinkOverlay>
+                        </NextLink>
+                    </LinkBox>
                 </SimpleGrid>
 
                 <SimpleGrid columns={[1, 1, 1]} alignItems="center">
