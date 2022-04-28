@@ -37,7 +37,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           REGISTRY: ${{ env.REGISTRY }}
-          SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          SANITY_DATASET: testing
 
       - name: Build backend with cache & push
         run: |
@@ -56,7 +56,6 @@ jobs:
         run: docker compose up --exit-code-from=frontend --attach=frontend
         env:
           REGISTRY: ${{ env.REGISTRY }}
-          TAG: ${{ env.BACKEND_TAG }}
-          SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          SANITY_DATASET: testing
           ADMIN_KEY: admin-passord
           NEXTAUTH_SECRET: very-secret-string-123

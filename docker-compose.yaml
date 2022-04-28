@@ -22,7 +22,7 @@ services:
 
   backend:
     build: backend
-    image: '${REGISTRY:-ghcr.io}/echo-webkom/backend:${TAG:-latest}'
+    image: '${REGISTRY:-ghcr.io}/echo-webkom/backend:${GITHUB_SHA:-latest}'
     # Don't start backend before database is up.
     depends_on:
       database:
