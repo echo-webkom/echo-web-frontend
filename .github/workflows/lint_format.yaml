@@ -29,5 +29,4 @@ jobs:
       - name: Run prettier check
         run: |
           cd frontend
-          yarn prettier -c "**/*.{js,jsx,ts,tsx,json,md}"
-          yarn prettier -c --tab-width=2 "**/*.{yaml,yml}"
+          yarn check 

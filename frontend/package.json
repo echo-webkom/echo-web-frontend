@@ -9,6 +9,7 @@
         "build": "next build",
         "dev": "next dev",
         "start": "next start",
+        "check": "cd .. && prettier -c \"**/*.{js,jsx,ts,tsx,json,md}\" && prettier -c --tab-width=2 \"**/*.{yaml,yml}\"",
         "format": "cd .. && prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && prettier --write --tab-width=2 \"**/*.{yaml,yml}\"",
         "lint": "next lint",
         "test": "jest",
