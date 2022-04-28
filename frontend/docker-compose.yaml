@@ -1,8 +1,8 @@
 version: '3.9'
 services:
   frontend:
-    build: frontend
-    image: '${REGISTRY:-ghcr.io}/echo-webkom/frontend:${GITHUB_SHA:-latest}'
+    build: .
+    image: '${REGISTRY:-ghcr.io}/echo-webkom/echo-web-frontend:${GITHUB_SHA:-latest}'
     command: bash -c "yarn start & yarn cypress run --config video=false,screenshotOnRunFailure=false && kill $$!"
     # Don't start tests before backend is up.
     depends_on:
@@ -21,8 +21,7 @@ services:
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-very-secret-string-123}
 
   backend:
-    build: backend
-    image: '${REGISTRY:-ghcr.io}/echo-webkom/backend:${TAG:-latest}'
+    image: '${REGISTRY:-ghcr.io}/echo-webkom/echo-web-backend:${TAG:-latest-prod}'
     # Don't start backend before database is up.
     depends_on:
       database:

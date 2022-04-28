@@ -5,7 +5,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_TAG: latest-prod
 
 permissions:
   packages: write
@@ -15,7 +14,7 @@ jobs:
   cypress_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout frontend repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Login to GitHub Container Registry
@@ -27,26 +26,33 @@ jobs:
 
       - name: Build frontend with cache & push
         run: |
+          cd frontend
           docker build \
-            --cache-from "$REGISTRY/$GITHUB_REPOSITORY" \
-            -t "$REGISTRY/$GITHUB_REPOSITORY:$GITHUB_SHA" \
+            --cache-from "$REGISTRY/frontend" \
+            -t "$REGISTRY/frontend:$GITHUB_SHA" \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --build-arg SANITY_DATASET=$SANITY_DATASET \
             .
-          docker push "$REGISTRY/$GITHUB_REPOSITORY" --all-tags
+          docker push "$REGISTRY/frontend" --all-tags
         env:
           DOCKER_BUILDKIT: 1
           REGISTRY: ${{ env.REGISTRY }}
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
 
-      - name: Pull backend image
-        run: docker pull "$REGISTRY/$BACKEND_REPOSITORY:$TAG"
+      - name: Build backend with cache & push
+        run: |
+          cd backend
+          docker build \
+            --cache-from "$REGISTRY/backend" \
+            -t "$REGISTRY/backend:$GITHUB_SHA" \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
+            .
+          docker push "$REGISTRY/backend" --all-tags
         env:
+          DOCKER_BUILDKIT: 1
           REGISTRY: ${{ env.REGISTRY }}
-          BACKEND_REPOSITORY: echo-webkom/echo-web-backend
-          TAG: ${{ env.BACKEND_TAG }}
 
-      - name: Run Cypress end-to-end tests against backend
+      - name: Run Cypress end-to-end tests
         run: docker compose up --exit-code-from=frontend --attach=frontend
         env:
           REGISTRY: ${{ env.REGISTRY }}

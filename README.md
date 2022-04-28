@@ -1,13 +1,13 @@
-# echo web frontend
+# echo web mono
 
-[![Jest](https://github.com/echo-webkom/echo-web-frontend/actions/workflows/jest_test.yaml/badge.svg)](https://github.com/echo-webkom/echo-web-frontend/actions/workflows/jest_test.yaml)
-[![Cypress](https://github.com/echo-webkom/echo-web-frontend/actions/workflows/cypress_test.yaml/badge.svg)](https://github.com/echo-webkom/echo-web-frontend/actions/workflows/cypress_test.yaml)
+[![Jest](https://github.com/echo-webkom/echo-web/actions/workflows/jest_test.yaml/badge.svg)](https://github.com/echo-webkom/echo-web/actions/workflows/jest_test.yaml)
+[![Cypress](https://github.com/echo-webkom/echo-web/actions/workflows/cypress_test.yaml/badge.svg)](https://github.com/echo-webkom/echo-web/actions/workflows/cypress_test.yaml)
 
 <a href="https://vercel.com/?utm_source=echo-webkom&utm_campaign=oss" target="_blank" rel="noopener">
    <img src="public/powered-by-vercel.svg" width="175" alt="Powered by Vercel" />
 </a>
 
-Frontend til nettsiden til **echo – Fagutvalget for informatikk** ved Universitetet i Bergen.
+Full-stack monorepo for nettsiden til **echo – Fagutvalget for informatikk** ved Universitetet i Bergen.
 
 Utviklet av frivillige informatikkstudenter fra undergruppen **echo Webkom**.
 
@@ -21,15 +21,15 @@ eller du har idéer til nye endringer!
 Fyll gjerne ut skjemaet [her](https://forms.gle/r9LNMFjanUNP7Gph9),
 eller send oss en mail på [webkom-styret@echo.uib.no](mailto:webkom-styret@echo.uib.no).
 
-## Oppsett for utviklere
+## Oppsett for utviklere (Frontend)
 
 **1. Klon Git-repoet.**
 
-    git clone git@github.com:echo-webkom/echo-web-frontend
+    git clone git@github.com:echo-webkom/echo-web
 
 **2. Naviger til riktig mappe.**
 
-    cd echo-web-frontend
+    cd echo-web/frontend
 
 **3. Installer dependencies (du trenger [yarn](https://classic.yarnpkg.com/en/docs/install) for dette).**
 
@@ -44,3 +44,27 @@ eller send oss en mail på [webkom-styret@echo.uib.no](mailto:webkom-styret@echo
     yarn dev
 
 Gå til `localhost:3000` i en nettleser for å se nettsiden.
+
+## Oppsett for utviklere (Backend)
+
+**1. Klon Git-repoet.**
+
+    git clone git@github.com:echo-webkom/echo-web
+
+**2. Naviger til riktig mappe.**
+
+    cd echo-web/backend
+
+**3. Start en container med serveren og Postgres (du trenger [Docker](https://docs.docker.com/compose/install) for dette).**
+
+    docker-compose up --build
+
+Serveren starter på `localhost:8080`, eller `localhost:$PORT` dersom $PORT er definert.
+
+
+#### Auto-formattering
+
+For å aktivere automatisk kodeformattering som kjører hver gang
+du commiter, kan du kjøre denne kommandoen (mens du er i Git-repoet):
+
+    ./gradlew addKtlintFormatGitPreCommitHook

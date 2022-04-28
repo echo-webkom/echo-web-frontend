@@ -14,15 +14,20 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/frontend/yarn.lock') }}
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-scripts
+        run: |
+          cd frontend
+          yarn --frozen-lockfile --ignore-scripts
 
       - name: Run linter
-        run: yarn next lint
+        run: |
+          cd frontend
+          yarn next lint
 
       - name: Run prettier check
         run: |
+          cd frontend
           yarn prettier -c "**/*.{js,jsx,ts,tsx,json,md}"
           yarn prettier -c --tab-width=2 "**/*.{yaml,yml}"

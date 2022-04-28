@@ -109,22 +109,6 @@
             "next/babel"
         ]
     },
-    "renovate": {
-        "extends": [
-            "config:base"
-        ],
-        "labels": [
-            "dependencies :handshake:"
-        ],
-        "commitMessagePrefix": "⬆️ ",
-        "prHourlyLimit": 0,
-        "stabilityDays": 3,
-        "prCreation": "not-pending",
-        "ignoreDeps": [
-            "postgres",
-            "node"
-        ]
-    },
     "dependencies": {
         "@chakra-ui/react": "1.8.8",
         "@emotion/react": "11.9.0",

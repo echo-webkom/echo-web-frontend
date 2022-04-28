@@ -14,10 +14,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/frontend/yarn.lock') }}
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-scripts
+        run: |
+          cd frontend
+          yarn --frozen-lockfile --ignore-scripts
 
       - name: Run API & component tests
-        run: yarn test
+        run: |
+          cd frontend
+          yarn test

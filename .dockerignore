@@ -1,17 +1,25 @@
 node_modules/
+build/
+
 .next/
 .git/
 .husky/
 .cache/
 .github/
+.idea/
+.gradle/
 
 LICENSE
 README.md
 docker-compose*
 Dockerfile
-.prettierignore
 jest*
 public/rss.xml
+renovate.json
+
+.gitignore
+.prettierignore
+*.iml
 
 cypress/videos/
 cypress/screenshots/
