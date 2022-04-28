@@ -1,8 +1,8 @@
 ---
 name: Foreslag til funksjonalitet
 about: Har du en idé til nettsiden?
-title: '[Funksjonalitet]'
-labels: 'feature :sparkles:'
+title: "[Funksjonalitet]"
+labels: "feature :sparkles:"
 assignees: bakseter, boaanes
 ---
 

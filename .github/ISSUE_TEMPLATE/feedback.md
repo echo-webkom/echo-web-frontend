@@ -1,8 +1,8 @@
 ---
 name: Tilbakemelding
 about: Hjelp oss bli bedre
-title: '[Tilbakemelding]'
-labels: 'feedback :scroll:'
+title: "[Tilbakemelding]"
+labels: "feedback :scroll:"
 assignees: bakseter, boaanes
 ---
 

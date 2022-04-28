@@ -61,7 +61,6 @@ Gå til `localhost:3000` i en nettleser for å se nettsiden.
 
 Serveren starter på `localhost:8080`, eller `localhost:$PORT` dersom $PORT er definert.
 
-
 #### Auto-formattering
 
 For å aktivere automatisk kodeformattering som kjører hver gang

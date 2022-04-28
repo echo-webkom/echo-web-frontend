@@ -1,8 +1,8 @@
 ---
 name: Bug-rapport
 about: Har du opplevd en bug? Opprett en issue her.
-title: '[Bug]'
-labels: 'bug :bug:'
+title: "[Bug]"
+labels: "bug :bug:"
 assignees: bakseter, boaanes
 ---
 
@@ -25,8 +25,8 @@ Legg gjerne med skjermbilder/gifer.
 
 **Detaljer:**
 
--   OS: [e.g. iOS]
--   Nettleser [e.g. chrome, safari]
+- OS: [e.g. iOS]
+- Nettleser [e.g. chrome, safari]
 
 **Eventuelle greier**
 Legg til eventuelle småting her.
