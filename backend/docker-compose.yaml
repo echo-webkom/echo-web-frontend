@@ -4,8 +4,8 @@ services:
     build:
       context: .
       cache_from:
-        - '${REGISTRY:-ghcr.io}/echo-webkom/echo-web-backend:${TAG:-latest-dev}'
-    image: '${REGISTRY:-ghcr.io}/echo-webkom/echo-web-backend:${TAG:-latest-dev}'
+        - '${REGISTRY:-ghcr.io}/echo-webkom/backend:${TAG:-latest}'
+    image: '${REGISTRY:-ghcr.io}/echo-webkom/backend:${TAG:-latest}'
     # Don't start backend before database is up.
     depends_on:
       database:

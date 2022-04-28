@@ -13,7 +13,7 @@
         "lint": "next lint",
         "test": "jest",
         "e2e": "docker compose down && docker compose up --build --exit-code-from=frontend --attach=frontend",
-        "prepare": "husky install"
+        "prepare": "cd .. && husky install"
     },
     "eslintConfig": {
         "parser": "@typescript-eslint/parser",

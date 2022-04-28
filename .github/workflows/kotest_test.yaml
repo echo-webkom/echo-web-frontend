@@ -23,6 +23,7 @@ jobs:
 
     - name: Build backend with cache
       run: |
+        cd backend
         docker build \
           --cache-from "$REGISTRY/backend" \
           -t "$REGISTRY/backend:$GITHUB_SHA" \
