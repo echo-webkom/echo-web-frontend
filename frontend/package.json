@@ -13,7 +13,6 @@
         "format": "cd .. && prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && prettier --write --tab-width=2 \"**/*.{yaml,yml}\"",
         "lint": "next lint",
         "test": "jest",
-        "e2e": "docker compose down && docker compose up --build --exit-code-from=frontend --attach=frontend",
         "prepare": "cd .. && husky install"
     },
     "eslintConfig": {
