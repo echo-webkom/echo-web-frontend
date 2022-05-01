@@ -1,3 +1,6 @@
-node_modules/
-public/
-.next/
+**/node_modules/
+**/.next/
+
+frontend/public/
+
+cms/config/

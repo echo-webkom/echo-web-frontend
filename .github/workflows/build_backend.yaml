@@ -1,4 +1,4 @@
-name: Build
+name: Build backend
 
 on:
   pull_request:
@@ -14,9 +14,9 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "adopt"
-          cache: "gradle"
+          java-version: '17'
+          distribution: 'adopt'
+          cache: 'gradle'
 
       - name: Build with Gradle & Shadow
         run: |

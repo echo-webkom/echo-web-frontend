@@ -13,20 +13,14 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: "**/node_modules"
+          path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/frontend/yarn.lock') }}
 
       - name: Install dependencies
-        run: |
-          cd frontend
-          yarn --frozen-lockfile --ignore-scripts
+        run: yarn --frozen-lockfile --ignore-scripts
 
       - name: Run linter
-        run: |
-          cd frontend
-          yarn next lint
+        run: yarn next lint
 
       - name: Run prettier check
-        run: |
-          cd frontend
-          yarn check 
+        run: yarn pcheck

@@ -9,11 +9,8 @@
         "build": "next build",
         "dev": "next dev",
         "start": "next start",
-        "check": "cd .. && prettier -c \"**/*.{js,jsx,ts,tsx,json,md}\" && prettier -c --tab-width=2 \"**/*.{yaml,yml}\"",
-        "format": "cd .. && prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && prettier --write --tab-width=2 \"**/*.{yaml,yml}\"",
         "lint": "next lint",
-        "test": "jest",
-        "prepare": "cd .. && husky install"
+        "test": "jest"
     },
     "eslintConfig": {
         "parser": "@typescript-eslint/parser",
@@ -148,7 +145,6 @@
         "eslint-config-prettier": "8.5.0",
         "eslint-plugin-prettier": "4.0.0",
         "eslint-plugin-unicorn": "42.0.0",
-        "husky": "7.0.4",
         "jest": "27.5.1",
         "lint-staged": "12.4.1",
         "prettier": "2.6.2",

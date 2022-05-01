@@ -1,10 +1,10 @@
-name: Jest
+name: Build CMS
 on:
   pull_request:
     branches: [master]
 
 jobs:
-  jest_tests:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -13,15 +13,15 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/frontend/yarn.lock') }}
+          path: '**/cms/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/cms/yarn.lock') }}
 
       - name: Install dependencies
         run: |
-          cd frontend
-          yarn --frozen-lockfile --ignore-scripts
+          cd cms
+          yarn --frozen-lockfile
 
-      - name: Run API & component tests
+      - name: Build with yarn
         run: |
-          cd frontend
-          yarn test
+          cd cms
+          yarn build
