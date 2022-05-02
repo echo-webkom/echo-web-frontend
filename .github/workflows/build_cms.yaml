@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd cms
-          yarn --frozen-lockfile
+          yarn --frozen-lockfile --ignore-scripts
 
       - name: Build with yarn
         run: |
