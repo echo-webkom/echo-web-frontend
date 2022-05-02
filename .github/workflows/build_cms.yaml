@@ -4,7 +4,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  build_cms:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

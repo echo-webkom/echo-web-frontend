@@ -2,9 +2,10 @@ name: Deploy to Sanity Studio
 on:
   push:
     branches: [master]
+    paths: 'cms/**'
 
 jobs:
-  deploy:
+  sanity_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

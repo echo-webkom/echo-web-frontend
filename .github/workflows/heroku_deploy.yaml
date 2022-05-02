@@ -1,0 +1,20 @@
+name: Heroku deploy
+on:
+  push:
+    branches: [master]
+    paths: 'backend/**'
+
+jobs:
+  heroku_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'echo-web-backend-prod'
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          buildpack: 'https://github.com/heroku/heroku-buildpack-gradle.git'
+          appdir: 'backend'
