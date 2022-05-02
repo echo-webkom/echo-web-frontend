@@ -3,9 +3,6 @@ on:
   pull_request:
     branches: [master]
 
-env:
-  IMAGE_NAME: 'ghcr.io/$GITHUB_REPOSITORY'
-
 permissions:
   packages: write
   actions: read
@@ -37,7 +34,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           SANITY_DATASET: testing
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
 
   build_backend:
     runs-on: ubuntu-latest
@@ -63,7 +60,7 @@ jobs:
           docker push "$IMAGE_NAME/backend" --all-tags
         env:
           DOCKER_BUILDKIT: 1
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
 
   kotest_tests:
     runs-on: ubuntu-latest
@@ -75,7 +72,7 @@ jobs:
       - name: Run Kotest tests with Docker Compose
         run: docker compose -f backend/docker-compose.kotest.yaml up --exit-code-from=backend
         env:
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
           TAG: ${{ github.sha }}
           ADMIN_KEY: admin-passord
 
@@ -91,12 +88,12 @@ jobs:
           docker pull "$IMAGE_NAME/backend:$GITHUB_SHA"
           docker pull "$IMAGE_NAME/frontend:$GITHUB_SHA"
         env:
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
 
       - name: Run Cypress end-to-end tests
         run: docker compose -f docker-compose.cypress.yaml up --exit-code-from=frontend --attach=frontend
         env:
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
           TAG: ${{ github.sha }}
           SANITY_DATASET: testing
           ADMIN_KEY: admin-passord
