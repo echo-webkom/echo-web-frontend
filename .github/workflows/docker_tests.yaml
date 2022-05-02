@@ -72,6 +72,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Pull Docker image
+        run: docker pull "$IMAGE_NAME/backend:$GITHUB_SHA"
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+
       - name: Run Kotest tests with Docker Compose
         run: docker compose -f backend/docker-compose.kotest.yaml up --exit-code-from=backend
         env:

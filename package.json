@@ -2,7 +2,6 @@
     "name": "echo-web",
     "private": true,
     "scripts": {
-        "vercel-build": "cd frontend && next build",
         "pcheck": "prettier -c \"**/*.{js,jsx,json,md}\" && prettier -c --tab-width=2 \"**/*.{yaml,yml}\"",
         "format": "prettier -w \"**/*.{js,jsx,json,md}\" && prettier -w --tab-width=2 \"**/*.{yaml,yml}\""
     },
