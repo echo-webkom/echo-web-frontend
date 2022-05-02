@@ -3,9 +3,6 @@ on:
   push:
     branches: [master]
 
-env:
-  IMAGE_NAME: 'ghcr.io/$GITHUB_REPOSITORY'
-
 permissions:
   packages: write
   actions: read
@@ -20,7 +17,7 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -36,7 +33,7 @@ jobs:
           docker push "$IMAGE_NAME/frontend" --all-tags
         env:
           DOCKER_BUILDKIT: 1
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
           TAG: latest
 
@@ -51,5 +48,5 @@ jobs:
           docker push "$IMAGE_NAME/backend" --all-tags
         env:
           DOCKER_BUILDKIT: 1
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: 'ghcr.io/{{ github.repository }}'
           TAG: latest
