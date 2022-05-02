@@ -1,7 +1,7 @@
 # echo web
 
-<a style="padding-right: 1rem;" href="https://sanity.io" target="_blank" rel="noopener"><img src="https://cdn.sanity.io/images/3do82whm/next/51af00784c5addcf63ae7f0c416756acca7e63ac-353x71.svg?dl=sanity-logo.svg" width="180" alt="Powered by Sanity" /></a>
-<a style="padding-left: 1rem;" href="https://vercel.com/?utm_source=echo-webkom&utm_campaign=oss" target="_blank" rel="noopener">
+<a href="https://sanity.io" target="_blank" rel="noopener"><img src="https://cdn.sanity.io/images/3do82whm/next/51af00784c5addcf63ae7f0c416756acca7e63ac-353x71.svg?dl=sanity-logo.svg" width="180" alt="Powered by Sanity" /></a>
+<a href="https://vercel.com/?utm_source=echo-webkom&utm_campaign=oss" target="_blank" rel="noopener">
 <img src="frontend/public/powered-by-vercel.svg" width="175" alt="Powered by Vercel" />
 </a>
 
@@ -76,7 +76,7 @@ du commiter, kan du kjøre denne kommandoen (mens du er i Git-repoet):
 
 **1. Klon Git-repoet.**
 
-    git clone git@github.com:echo-webkom/echo-web-cms
+    git clone git@github.com:echo-webkom/echo-web
 
 **2. Naviger til riktig mappe.**
 
