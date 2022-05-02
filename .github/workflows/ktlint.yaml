@@ -1,5 +1,4 @@
 name: ktlint
-
 on:
   pull_request:
     branches: [master]

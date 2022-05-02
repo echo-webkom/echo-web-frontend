@@ -1,10 +1,10 @@
-name: Docker push image
+name: Docker push images
 on:
   push:
     branches: [master]
 
 env:
-  REGISTRY: ghcr.io
+  IMAGE_NAME: 'ghcr.io/$GITHUB_REPOSITORY'
 
 permissions:
   packages: write
@@ -24,32 +24,32 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build frontend with cache & push
+      - name: Build frontend with cache and push to registry
         run: |
           cd frontend
           docker build \
-            --cache-from "$REGISTRY/frontend" \
-            -t "$REGISTRY/frontend:$TAG" \
+            --cache-from "$IMAGE_NAME/frontend" \
+            -t "$IMAGE_NAME/frontend:$TAG" \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --build-arg SANITY_DATASET=$SANITY_DATASET \
             .
-          docker push "$REGISTRY/frontend" --all-tags
+          docker push "$IMAGE_NAME/frontend" --all-tags
         env:
           DOCKER_BUILDKIT: 1
-          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
           TAG: latest
 
-      - name: Build backend with cache & push
+      - name: Build backend with cache and push to registry
         run: |
           cd backend
           docker build \
-            --cache-from "$REGISTRY/backend" \
-            -t "$REGISTRY/backend:$TAG" \
+            --cache-from "$IMAGE_NAME/backend" \
+            -t "$IMAGE_NAME/backend:$TAG" \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             .
-          docker push "$REGISTRY/backend" --all-tags
+          docker push "$IMAGE_NAME/backend" --all-tags
         env:
           DOCKER_BUILDKIT: 1
-          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
           TAG: latest

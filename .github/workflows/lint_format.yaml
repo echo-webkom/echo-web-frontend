@@ -14,13 +14,17 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/frontend/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install dependencies
         run: yarn --frozen-lockfile --ignore-scripts
 
-      - name: Run linter
-        run: yarn next lint
+      - name: Run linters
+        run: |
+          cd frontend
+          yarn next lint
+          cd ../cms
+          yarn lint
 
       - name: Run prettier check
         run: yarn pcheck

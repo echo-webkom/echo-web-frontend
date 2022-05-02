@@ -13,12 +13,13 @@ if [ -z ${type+x} ]; then
     exit 1
 fi
 
-docker-compose down --remove-orphans
+docker compose down --remove-orphans
 
 if [ "$type" = "kotest" ]; then
-    docker-compose -f docker-compose.kotest.yaml up --build --exit-code-from=backend
+    docker compose -f docker-compose.kotest.yaml up --build --exit-code-from=backend
 elif [ "$type" = "cypress" ]; then
-    docker-compose -f docker-compose.cypress.yaml up --build --exit-code-from=frontend
+    cd ..
+    docker compose -f docker-compose.cypress.yaml up --build --exit-code-from=frontend
 else
     echo "Invalid test type. Options are 'kotest' and 'cypress'."
 fi
