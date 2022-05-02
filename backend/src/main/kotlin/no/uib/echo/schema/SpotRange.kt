@@ -28,7 +28,7 @@ data class SpotRangeWithCountJson(
 )
 
 object SpotRange : Table() {
-    val id: Column<Int> = integer("id").uniqueIndex().autoIncrement()
+    private val id: Column<Int> = integer("id").uniqueIndex().autoIncrement()
     val spots: Column<Int> = integer("spots")
     val minDegreeYear: Column<Int> = integer("min_degree_year")
     val maxDegreeYear: Column<Int> = integer("max_degree_year")
@@ -45,7 +45,8 @@ data class SlugJson(
 @Serializable
 data class RegistrationCountJson(
     val slug: String,
-    val count: Long
+    val count: Long,
+    val waitListCount: Long
 )
 
 fun selectSpotRanges(slug: String): List<SpotRangeJson> {

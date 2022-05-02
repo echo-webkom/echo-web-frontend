@@ -84,7 +84,7 @@ export default {
                         select: {
                             media: 'profile.picture',
                             title: 'profile.name',
-                            subtitle: 'title',
+                            subtitle: 'role',
                         },
                     },
                 },
